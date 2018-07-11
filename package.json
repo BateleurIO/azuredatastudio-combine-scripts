@@ -4,6 +4,7 @@
     "description": "Create a single combined script from several files.",
     "version": "1.0.0",
     "publisher": "BateleurIO",
+    "repository": "https://github.com/BateleurIO/sqlops-combine-scripts.git",
     "engines": {
         "vscode": "^1.25.0",
         "sqlops": "*"

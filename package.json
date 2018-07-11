@@ -33,13 +33,13 @@
     "devDependencies": {
         "@types/mocha": "^2.2.42",
         "@types/node": "^7.0.43",
+        "@types/tmp": "^0.0.33",
         "sqlops": "github:anthonydresser/sqlops-extension-sqlops",
         "tslint": "^5.8.0",
         "typescript": "^2.6.1",
         "vscode": "^1.1.6"
     },
     "dependencies": {
-        "@types/tmp": "^0.0.33",
         "tmp": "^0.0.33"
     }
 }

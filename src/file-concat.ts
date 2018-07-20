@@ -19,6 +19,7 @@ export class FileConcatenator {
         this.items.push('* Start: ' + uri.fsPath);
         this.items.push(`${this.line}*/`);
         this.items.push(`print \'Start: ${uri.fsPath}\'`);
+        this.items.push('GO');
         this.items.push('');
         this.items.push(<string><any>data);
         this.items.push('GO');
@@ -26,6 +27,7 @@ export class FileConcatenator {
         this.items.push('* End: ' + uri.fsPath);
         this.items.push(`${this.line}*/`);
         this.items.push(`print \'End: ${uri.fsPath}\'`);
+        this.items.push('GO');
         this.items.push('');
     }
     public getText() {

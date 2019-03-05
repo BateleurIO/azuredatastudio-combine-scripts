@@ -3,7 +3,7 @@
     "displayName": "Combine Scripts",
     "description": "Create a single combined script from several files.",
     "icon": "icons/main-icon.png",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "publisher": "BateleurIO",
     "repository": "https://github.com/BateleurIO/sqlops-combine-scripts.git",
     "engines": {
@@ -30,6 +30,80 @@
                     "command": "extension.combineScripts"
                 }
             ]
+        },
+        "configuration": {
+            "title": "Combine Scripts",
+            "properties": {
+                "combineScripts.includeToc": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Include Table of Contents"
+                },
+                "combineScripts.fileMasks": {
+                    "type": "string[]",
+                    "default": ["*.sql"],
+                    "description": "File Masks"
+                },
+                "combineScripts.fileHeader": {
+                    "type": "string[]",
+                    "default": [
+                        "/**********************************************************************************",
+                        "* This is a concatenation of all the selected files, including files in subfolders.",
+                        "* The start and end of each file contains a comment with its name, as well as a",
+                        "* print statement.",
+                        "***********************************************************************************"
+                    ],
+                    "description": "File Header"
+                },
+                "combineScripts.fileFooter": {
+                    "type": "string[]",
+                    "default": [],
+                    "description": "File Footer"
+                },
+                "combineScripts.tocHeader": {
+                    "type": "string[]",
+                    "default": [
+                        "* These are the line numbers for the included files:"
+                    ],
+                    "description": "Table of Contents Header"
+                },
+                "combineScripts.tocEntry": {
+                    "type": "string",
+                    "default": "* ${lineNo}\t\t${scriptPath}",
+                    "description": "Table of Contents Entry"
+                },
+                "combineScripts.tocFooter": {
+                    "type": "string[]",
+                    "default": [
+                        "***********************************************************************************/"
+                    ],
+                    "description": "Table of Contents Footer"
+                },
+                "combineScripts.scriptHeader": {
+                    "type": "string[]",
+                    "default": [
+                        "/*********************************************************************************",
+                        "* Start: ${scriptPath}",
+                        "**********************************************************************************/",
+                        "print 'Start: ${scriptPath}'",
+                        "GO"
+                    ],
+                    "description": "Individual Script Header"
+                },
+                "combineScripts.scriptFooter": {
+                    "type": "string[]",
+                    "default": [
+                        "GO",
+                        "/*********************************************************************************",
+                        "* End: ${scriptPath}",
+                        "**********************************************************************************/",
+                        "print 'End: ${scriptPath}'",
+                        "GO",
+                        "/*********************************************************************************/"
+                    ],
+                    "description": "Individual Script Footer"
+                }
+            }
         }
     },
     "scripts": {

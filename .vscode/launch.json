@@ -11,32 +11,20 @@
 {
 	"version": "0.2.0",
     "configurations": [
+
         {
-            "name": "Extension",
             "type": "sqlopsExtensionHost",
             "request": "launch",
-            "runtimeExecutable": "sqlops",
+            "name": "Launch Extension",
+            "runtimeExecutable": "azuredatastudio",
             "args": [
                 "--extensionDevelopmentPath=${workspaceFolder}"
             ],
             "outFiles": [
                 "${workspaceFolder}/out/**/*.js"
             ],
-            "preLaunchTask": "npm: watch"
-        },
-        {
-            "name": "Extension Tests",
-            "type": "sqlopsExtensionHost",
-            "request": "launch",
-            "runtimeExecutable": "sqlops",
-            "args": [
-                "--extensionDevelopmentPath=${workspaceFolder}",
-                "--extensionTestsPath=${workspaceFolder}/out/test"
-            ],
-            "outFiles": [
-                "${workspaceFolder}/out/test/**/*.js"
-            ],
-            "preLaunchTask": "npm: watch"
+            "preLaunchTask": "npm: watch",
+            "timeout": 15000
         }
     ]
 }

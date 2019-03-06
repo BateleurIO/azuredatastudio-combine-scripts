@@ -39,10 +39,17 @@
                     "default": true,
                     "description": "Include Table of Contents"
                 },
-                "combineScripts.fileMasks": {
+                "combineScripts.fileGlobs": {
                     "type": "string[]",
-                    "default": ["*.sql"],
-                    "description": "File Masks"
+                    "default": [
+                        "**/*.sql"
+                    ],
+                    "description": "File Globs"
+                },
+                "combineScripts.outputFileExt": {
+                    "type": "string",
+                    "default": ".sql",
+                    "description": "Output File Extension"
                 },
                 "combineScripts.fileHeader": {
                     "type": "string[]",
@@ -123,6 +130,8 @@
         "vscode": "^1.1.6"
     },
     "dependencies": {
+        "@types/glob": "^7.1.1",
+        "glob": "^7.1.3",
         "tmp": "^0.0.33"
     }
 }

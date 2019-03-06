@@ -1,26 +1,27 @@
 import { Uri } from "vscode";
 import * as fs from 'fs';
 import * as path from 'path';
+import * as vscode from 'vscode';
+// import * as glob from 'glob';
+import { GlobSync } from 'glob';
 
 export class FullFileList {
-    private _list: Uri[] = [];
+    private _list: string[] = [];
     public get list() { return this._list; }
+    private config: any = {};
 
     constructor (files: Uri[]) {
+        this.config = vscode.workspace.getConfiguration('combineScripts');
         files.forEach(uri => this.addFilesToList(uri));
     }
     addFilesToList(uri: Uri) {
-        if (fs.lstatSync(uri.fsPath).isDirectory()) {
-            let children = fs.readdirSync(uri.fsPath);
-            children.forEach(child => {
-                let childUri = Uri.parse(path.join(uri.fsPath, child));
-                this.addFilesToList(childUri);
-            });
-        } else {
-            if (!fs.lstatSync(uri.fsPath).isFile() || path.extname(uri.fsPath).toUpperCase() !== '.SQL') {
-                return;
+        for (const pattern of this.config.fileGlobs) {
+            if (fs.lstatSync(uri.fsPath).isDirectory()) {
+                var glob = new GlobSync(pattern, { cwd: uri.fsPath, absolute: true });
+                this.list.push(...glob.found);
+            } else if (fs.lstatSync(uri.fsPath).isFile()) {
+                this.list.push(uri.fsPath);
             }
-            this.list.push(uri);
         }
     }
 }

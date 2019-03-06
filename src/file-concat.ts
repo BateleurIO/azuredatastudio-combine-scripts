@@ -17,7 +17,7 @@ export class FileConcatenator {
         const newLine = line.replace(/\$\{scriptPath\}/, path).replace(/\$\{lineNo\}/, this.lineNumbers[path]);
         return newLine;
     }
-    addToc(uriList: Uri[]): any {
+    addToc(uriList: string[]): any {
         this.items.push(...this.config.tocHeader);
         this.tocIndex = this.items.length;
         this.items.push(...uriList.map(() => ''));
@@ -37,41 +37,21 @@ export class FileConcatenator {
     private addFooter(): any {
         this.items.push(...this.config.fileFooter);
     }
-    private readLines(input: any, func: any) {
-        var remaining = '';
-        
-        input.on('data', function(data: any) {
-            remaining += data;
-            var index = remaining.indexOf('\n');
-            while (index > -1) {
-            var line = remaining.substring(0, index);
-            remaining = remaining.substring(index + 1);
-            func(line);
-            index = remaining.indexOf('\n');
-            }
-        });
-        
-        input.on('end', function() {
-            if (remaining.length > 0) {
-            func(remaining);
-            }
-        });
-    }
-    private addFile(uri: Uri): any {
+    private addFile(uri: string): any {
         const currentLength = this.items.length;
-        let data = fs.readFileSync(uri.fsPath).toString().replace(/\r/, '').split("\n");
-        this.items.push(...this.replaceTagsArr(uri.fsPath, this.config.scriptHeader));
+        let data = fs.readFileSync(uri).toString().replace(/\r/, '').split("\n");
+        this.items.push(...this.replaceTagsArr(uri, this.config.scriptHeader));
         this.items.push(...data);
-        this.items.push(...this.replaceTagsArr(uri.fsPath, this.config.scriptFooter));
+        this.items.push(...this.replaceTagsArr(uri, this.config.scriptFooter));
         if (currentLength !==  this.items.length) {
-            this.lineNumbers[uri.fsPath] = currentLength + 1;
+            this.lineNumbers[uri] = currentLength + 1;
         }
     }
     public getText() {
         return this.items.join('\n');
     }
 
-    constructor(uriList: Uri[]) {
+    constructor(uriList: string[]) {
         this.config = vscode.workspace.getConfiguration('combineScripts');
         this.addHeader();
         if (this.config.includeToc) {

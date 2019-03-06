@@ -1,6 +1,5 @@
 import { Uri } from "vscode";
 import * as fs from 'fs';
-import * as path from 'path';
 import * as vscode from 'vscode';
 // import * as glob from 'glob';
 import { GlobSync } from 'glob';

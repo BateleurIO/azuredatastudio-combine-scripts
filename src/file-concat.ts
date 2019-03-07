@@ -1,8 +1,6 @@
 import * as fs from 'fs';
-import * as vscode from 'vscode';
 
 export class FileConcatenator {
-    private config: vscode.WorkspaceConfiguration;
     private items: string[] = [];
     private lineNumbers: any = {};
     private tocIndex = 0;
@@ -64,8 +62,7 @@ export class FileConcatenator {
         return x;
     }
 
-    constructor(uriList: string[]) {
-        this.config = vscode.workspace.getConfiguration('combineScripts');
+    constructor(private config: any, uriList: string[]) {
         this.addHeader();
         if (this.config.includeToc) {
             this.addToc(uriList);

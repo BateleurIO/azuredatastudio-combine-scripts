@@ -6,15 +6,16 @@ import * as fs from 'fs';
 import * as tmp from 'tmp';
 import { FullFileList } from './full-file-list';
 import { FileConcatenator } from './file-concat';
+import { BateleurConfig } from './bateleur-config';
 
 export function activate(context: vscode.ExtensionContext) {
-    let config = vscode.workspace.getConfiguration('combineScripts');
-    context.subscriptions.push(vscode.commands.registerCommand('extension.combineScripts', (selectedFile, fileList) => {
-        let files = (new FullFileList(fileList)).list;
-        let text = (new FileConcatenator(files)).getText();
+    context.subscriptions.push(vscode.commands.registerCommand('extension.combineScripts', (selectedFile: any, fileList: any) => {
+        const config = new BateleurConfig(fileList).get;
+        let files = (new FullFileList(config, fileList)).list;
+        let text = (new FileConcatenator(config, files)).getText();
         let tempName = tmp.tmpNameSync() + config.outputFileExt;
         fs.writeFileSync(tempName, text);
-        vscode.workspace.openTextDocument(tempName).then(doc => {
+        vscode.workspace.openTextDocument(tempName).then((doc: any) => {
             vscode.window.showTextDocument(doc);
         });
     }));

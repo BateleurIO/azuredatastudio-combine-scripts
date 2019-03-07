@@ -1,16 +1,12 @@
 import { Uri } from "vscode";
 import * as fs from 'fs';
-import * as vscode from 'vscode';
-// import * as glob from 'glob';
 import { GlobSync } from 'glob';
 
 export class FullFileList {
     private _list: string[] = [];
     public get list() { return this._list; }
-    private config: any = {};
 
-    constructor (files: Uri[]) {
-        this.config = vscode.workspace.getConfiguration('combineScripts');
+    constructor (private config: any, files: Uri[]) {
         files.forEach(uri => this.addFilesToList(uri));
     }
     addFilesToList(uri: Uri) {

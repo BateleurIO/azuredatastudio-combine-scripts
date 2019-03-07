@@ -46,11 +46,6 @@
                     ],
                     "description": "File Globs"
                 },
-                "combineScripts.outputFileExt": {
-                    "type": "string",
-                    "default": ".sql",
-                    "description": "Output File Extension"
-                },
                 "combineScripts.fileHeader": {
                     "type": "string[]",
                     "default": [
@@ -121,17 +116,19 @@
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
+        "@types/cosmiconfig": "^5.0.3",
+        "@types/glob": "^7.1.1",
         "@types/mocha": "^2.2.42",
         "@types/node": "^7.0.43",
         "@types/tmp": "^0.0.33",
         "sqlops": "github:anthonydresser/sqlops-extension-sqlops",
         "tslint": "^5.8.0",
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.30"
+        "typescript": "^2.6.1"
     },
     "dependencies": {
-        "@types/glob": "^7.1.1",
+        "cosmiconfig": "^5.1.0",
         "tmp": "^0.0.33",
-        "url-parse": "^1.4.4"
+        "url-parse": "^1.4.4",
+        "vscode": "^1.1.18"
     }
 }

@@ -10,14 +10,27 @@ import { BateleurConfig } from './bateleur-config';
 
 export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(vscode.commands.registerCommand('extension.combineScripts', (selectedFile: any, fileList: any) => {
-        const config = new BateleurConfig(fileList).get;
-        let files = (new FullFileList(config, fileList)).list;
-        let text = (new FileConcatenator(config, files)).getText();
-        let tempName = tmp.tmpNameSync() + config.outputFileExt;
-        fs.writeFileSync(tempName, text);
-        vscode.workspace.openTextDocument(tempName).then((doc: any) => {
-            vscode.window.showTextDocument(doc);
-        });
+        const config = new BateleurConfig(<any>vscode.workspace.rootPath).get;
+        const files = (new FullFileList(config, fileList)).list;
+        const fileLists = { };
+        for (const file of files) {
+            const ext = <any>(file.split('.').pop());
+            if (!fileLists.hasOwnProperty(ext)) {
+                fileLists[ext] = [];
+            }
+            fileLists[ext].push(file);
+        }
+        for (const key in fileLists) {
+            if (!fileLists.hasOwnProperty(key)) {
+                continue;
+            }
+            let text = (new FileConcatenator(config, fileLists[key])).getText();
+            let tempName = tmp.tmpNameSync() + '.' + key;
+            fs.writeFileSync(tempName, text);
+            vscode.workspace.openTextDocument(tempName).then((doc: any) => {
+                vscode.window.showTextDocument(doc);
+            });
+        }        
     }));
 
     // context.subscriptions.push(vscode.commands.registerCommand('extension.showCurrentConnection', () => {

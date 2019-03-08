@@ -16,8 +16,21 @@ export class BateleurConfig {
     
     get get(): any {
         const vscodeConfig = vscode.workspace.getConfiguration('combineScripts');
-        const cosmic = this.config;
-        let result = {...vscodeConfig, ...cosmic};
-        return result;
+        let config = this.config;
+        if (!config.fileGroups) {
+            const newObj = {};
+            Object.assign(newObj, config);
+            config = {
+                "fileGroups": [newObj]
+            };
+        } 
+        for (var index = 0; index < config.fileGroups.length; index++) {
+            let item = config.fileGroups[index];
+            if (!item.replaceDefault) {
+                item = {...vscodeConfig, ...item};
+                config.fileGroups[index] = item;
+            }
+        }
+        return config;
     }
 }

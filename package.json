@@ -116,8 +116,6 @@
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "@types/cosmiconfig": "^5.0.3",
-        "@types/glob": "^7.1.1",
         "@types/mocha": "^2.2.42",
         "@types/node": "^7.0.43",
         "@types/tmp": "^0.0.33",
@@ -126,7 +124,8 @@
         "typescript": "^2.6.1"
     },
     "dependencies": {
-        "cosmiconfig": "^5.1.0",
+        "@types/glob": "^7.1.1",
+        "config-loader-ts": "^0.1.8",
         "tmp": "^0.0.33",
         "url-parse": "^1.4.4",
         "vscode": "^1.1.18"

@@ -6,6 +6,7 @@
     "version": "1.4.0",
     "publisher": "BateleurIO",
     "repository": "https://github.com/BateleurIO/sqlops-combine-scripts.git",
+    "license": "MIT",
     "engines": {
         "vscode": "^1.25.0",
         "sqlops": "*"
@@ -71,7 +72,7 @@
                 },
                 "combineScripts.tocEntry": {
                     "type": "string",
-                    "default": "* ${lineNo}\t\t${scriptPath}",
+                    "default": "* ${lineNo}\t\t${entryPath}",
                     "description": "Table of Contents Entry"
                 },
                 "combineScripts.tocFooter": {
@@ -81,25 +82,25 @@
                     ],
                     "description": "Table of Contents Footer"
                 },
-                "combineScripts.scriptHeader": {
+                "combineScripts.entryHeader": {
                     "type": "string[]",
                     "default": [
                         "/*********************************************************************************",
-                        "* Start: ${scriptPath}",
+                        "* Start: ${entryPath}",
                         "**********************************************************************************/",
-                        "print 'Start: ${scriptPath}'",
+                        "print 'Start: ${entryPath}'",
                         "GO"
                     ],
                     "description": "Individual Script Header"
                 },
-                "combineScripts.scriptFooter": {
+                "combineScripts.entryFooter": {
                     "type": "string[]",
                     "default": [
                         "GO",
                         "/*********************************************************************************",
-                        "* End: ${scriptPath}",
+                        "* End: ${entryPath}",
                         "**********************************************************************************/",
-                        "print 'End: ${scriptPath}'",
+                        "print 'End: ${entryPath}'",
                         "GO",
                         "/*********************************************************************************/"
                     ],
@@ -116,18 +117,18 @@
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "@types/mocha": "^2.2.42",
-        "@types/node": "^7.0.43",
-        "@types/tmp": "^0.0.33",
+        "@types/glob": "^7.1.1",
+        "@types/mocha": "^5.2.6",
+        "@types/node": "^11.11.6",
+        "@types/tmp": "0.0.34",
         "sqlops": "github:anthonydresser/sqlops-extension-sqlops",
-        "tslint": "^5.8.0",
-        "typescript": "^2.6.1"
+        "tslint": "^5.14.0",
+        "typescript": "^3.3.4000",
+        "vscode": "^1.1.33"
     },
     "dependencies": {
-        "@types/glob": "^7.1.1",
-        "config-loader-ts": "^0.1.8",
-        "tmp": "^0.0.33",
-        "url-parse": "^1.4.4",
-        "vscode": "^1.1.18"
+        "@cobuskruger/combine-files": "^1.0.4",
+        "tmp": "0.0.33",
+        "url-parse": "^1.4.4"
     }
 }

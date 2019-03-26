@@ -28,7 +28,7 @@ export function activate(context: vscode.ExtensionContext) {
         } else {
             if (selectedFile) {
                 if (selectedFile instanceof vscode.Uri) {
-                    fileList.push(selectedFile.fsPath)
+                    fileList.push(selectedFile.fsPath);
                 } else {
                     fileList.push(selectedFile);
                 }

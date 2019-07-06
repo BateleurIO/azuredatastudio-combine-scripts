@@ -3,7 +3,7 @@
     "displayName": "Combine Scripts",
     "description": "Create a single combined script from several files.",
     "icon": "icons/main-icon.png",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "publisher": "BateleurIO",
     "repository": "https://github.com/BateleurIO/sqlops-combine-scripts.git",
     "license": "MIT",
@@ -54,6 +54,7 @@
                         "* This is a concatenation of all the selected files, including files in subfolders.",
                         "* The start and end of each file contains a comment with its name, as well as a",
                         "* print statement.",
+                        "* Generated at: ${now} ",
                         "***********************************************************************************"
                     ],
                     "description": "File Header"
@@ -127,7 +128,7 @@
         "vscode": "^1.1.33"
     },
     "dependencies": {
-        "@cobuskruger/combine-files": "^1.0.4",
+        "@cobuskruger/combine-files": "^1.0.6",
         "tmp": "0.0.33",
         "url-parse": "^1.4.4"
     }

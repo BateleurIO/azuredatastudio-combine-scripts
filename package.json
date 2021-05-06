@@ -130,6 +130,6 @@
     "dependencies": {
         "@cobuskruger/combine-files": "^1.0.6",
         "tmp": "0.0.33",
-        "url-parse": "^1.4.4"
+        "url-parse": "^1.5.0"
     }
 }
